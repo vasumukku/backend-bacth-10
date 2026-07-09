@@ -1,0 +1,71 @@
+backned
+day-1
+
+#intro js 
+1.how to run
+2.primitive vs non-primitive 
+3.interpreter vs compiled 
+4.static vs dynamic 
+5.node js intro 
+6.case style -camel case
+7.var 
+8.dtypes
+9.operator--pre ,post 
+10.let vs var vs const 
+11.how to excute using node js 
+
+Day-2
+
+1.conditions
+2.loops
+3.loops control -break,continue
+4.function -d,e,a,=>,higher order function
+5.string
+6.templatelitersl
+7.array--accessing,updation ,deletion,slicing 
+8.push and pop
+9.shift and unshift
+10.splice and slice 
+11.array destriting
+12.objec
+13.accesing and updation ,deletion
+14.object destructing
+15.map,filter,reduce 
+
+
+
+Day-3
+1.sych vs async
+2.types-3
+3.promises vs async and await
+4.intervals
+5.fetch
+6.event loop
+7.node js arch 
+
+
+day-4
+
+1.mongodb intro
+2.cluster setup
+3.shell install
+4.crud operations
+5.understnd projec folder setup
+5.package.json
+7.server creation
+8.connecting mongodb
+
+day-5
+
+1.revision
+2.insatll nodemon 
+3.setup shortcuts
+4.model for signup and login
+5.controllers for signup and login
+6.api creation-signin ,login
+7.postman install
+8.postman testing
+9.notebook model creation
+10.api creation for note crud 
+11.create ,update,get all notes 
+

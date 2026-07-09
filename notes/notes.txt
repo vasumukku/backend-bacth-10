@@ -1,0 +1,190 @@
+Definition
+
+The map() method is a JavaScript Higher-Order Function that creates a new array by applying a function to every element of the original array.
+
+Easy Definition:
+map() is used to transform or modify each element of an array and returns a new array.
+
+Syntax
+
+array.map((currentValue, index, array) => {
+    // return modified value
+});
+
+
+// bcrypt (Hashing)
+1.Used to store passwords securely.
+2.It converts a password into a fixed-length hash.--60char
+3.You cannot get the original password back.
+4.When a user logs in, bcrypt hashes the entered password and compares 
+  it with the stored hash.
+
+  syntax : const variableName = await bcrypt.hash(plainPassword, saltRounds);
+==> The salt rounds (cost factor). Higher values are more secure but take more time 
+    to hash.
+
+    compare syntax :const result = await bcrypt.compare(plainPassword, hashedPassword);
+
+//Encryption
+1.Used to protect data that you need to read later.
+2.The data is encrypted using a secret key.
+3.You can decrypt it back using the same key 
+(or a corresponding private key, depending on the algorithm). 
+
+
+// Why do we use bcrypt instead of encryption for passwords?
+
+// Answer: Because passwords should never be recoverable. bcrypt creates a one-way hash,
+ making it much safer than encryption, which allows the original data to be decrypted 
+ if the key is available.
+
+
+
+
+
+Definition
+
+The filter() method is a JavaScript Higher-Order Function that creates a new array containing only the elements that satisfy a given condition.
+
+
+Easy Definition:
+filter() is used to select elements from an array based on a condition and returns a new array.
+
+syntax:
+
+array.filter((currentValue, index, array) => {
+    // return true or false
+});
+
+
+
+
+
+
+
+Definition
+
+The reduce() method is a JavaScript Higher-Order Function that reduces all the elements of an array into a single value (such as a sum, product, object, or string).
+
+Easy Definition:
+reduce() is used to combine all elements of an array into one final value.
+
+
+syntax :
+array.reduce((accumulator, currentValue,index,array) => {
+    return updatedAccumulator;
+}, initialValue);
+
+
+
+map() = Modify every element.
+filter() = Select matching elements.
+reduce() = Combine everything into one value.
+
+
+
+
+
+Promise
+
+A Promise is an object that represents the eventual success or failure of an asynchronous operation.
+
+				or 
+
+A Promise is an object that represents the future result of an asynchronous operation.
+
+Fetch
+
+The Fetch API is a JavaScript API used to send HTTP requests to a server. It returns a Promise, which can be handled using .then() and .catch().
+
+Async
+
+The async keyword declares an asynchronous function that always returns a Promise.
+
+Await
+
+The await keyword pauses the execution of an async function until a Promise is resolved or rejected.
+
+
+
+
+
+const orderPizza = new Promise((resolve, reject) => {
+
+    let pizzaReady = true;
+
+    if (pizzaReady) {
+        resolve("🍕 Pizza Delivered Successfully");
+    } else {
+        reject("❌ Sorry! Pizza is not available");
+    }
+
+});
+
+orderPizza
+.then((message) => {
+    console.log(message);
+})
+.catch((error) => {
+    console.log(error);
+});
+
+
+Promise = "I will do it later."
+async = "This function works asynchronously."
+await = "Wait until the work is finished."
+
+
+
+function checkResult() {
+
+    return new Promise((resolve, reject) => {
+
+        let marks = 80;
+
+        if (marks >= 35) {
+            resolve("🎉 Congratulations! You Passed");
+        } else {
+            reject("😢 You Failed");
+        }
+
+    });
+
+}
+
+async function displayResult() {
+
+    try {
+
+        const result = await checkResult();
+
+        console.log(result);
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+}
+
+displayResult();
+
+
+
+
+Definition
+
+setInterval() is a JavaScript function that repeatedly executes a function after a specified time interval.
+
+Easy Definition:
+setInterval() is used to run the same task again and again after a fixed amount of time.
+
+
+setInterval() is a JavaScript timer function that repeatedly executes a specified function after a fixed time interval until it is stopped using clearInterval().
+
+
+Syntax
+setInterval(function, timeInMilliseconds);
+
+

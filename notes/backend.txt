@@ -1,0 +1,33 @@
+1.package.json
+2.create a server
+  i.install express
+  ii.import express -require
+  iii.calling express
+  iv.careate a port number 
+  v.call the server --server.listen(port,callback) 
+3.connecting mongodb
+  i.install mongoose
+  ii.imoport mongoose using require method
+  iii.mongoose.connect("connection string")
+  iv.then and catch 
+4.setup shortcuts
+  i.install nodemon
+  ii.go to package.json setup script commands
+  iii.start:node filname.json
+  iv.dev:nodemon filname.js
+5.model creation
+
+  i.imoport mongoose and create js file
+  ii.create schema /plan 
+  iii.create table--mongoose.model(tablename,schema)
+  iv.export 
+6.controllers
+  i.create js file 
+  ii.import model --using require,req path
+  iii.write logic of api creation 
+  iv.export 
+7.create api 
+  i.import controller
+  ii.api creation --server.method(path,controller) 
+8.testing -postman
+
