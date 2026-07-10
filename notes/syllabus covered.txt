@@ -1,3 +1,9 @@
+
+
+http://localhost:5000/
+
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
 backned
 day-1
 
@@ -68,4 +74,14 @@ day-5
 9.notebook model creation
 10.api creation for note crud 
 11.create ,update,get all notes 
+
+Day-6
+1.delete api
+2.hash vs encrypt
+3.named exports vs default exports 
+4.html and css revision
+5.react app insatllion
+6.understnding folder structure 
+7.creation of login and signin package
+
 

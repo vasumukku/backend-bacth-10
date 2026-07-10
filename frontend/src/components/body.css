@@ -1,0 +1,22 @@
+.logout-style{
+  background-color: red;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  margin-left: 200px;
+}
+.logout-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-right: 20px;
+}
+.searchbar{
+  height: 30px;
+  width: 500px;
+  border-radius: 10px;
+  font-size: 20px;
+  box-shadow: 10px 10px 10px rgb(199, 193, 193);
+}

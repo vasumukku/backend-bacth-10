@@ -188,3 +188,27 @@ Syntax
 setInterval(function, timeInMilliseconds);
 
 
+npm install sweetalert2
+import Swal from "sweetalert2";
+Swal.fire({
+  title: "Success!",
+  text: "Login Successful",
+  icon: "success",
+});
+
+1.Success
+2.Error
+3.Warning
+4.info
+
+
+connectin frontend to backend 
+steps:
+
+1.install axios -- in fronted folder
+2.import axios 
+3. call api using sytax ----axios.method(api,data) 
+4.run both servers 
+5.install cors in backend folder
+6.import cors in backend server.js folder
+7.create a middleware of cors in backend folder server.js----app.use(cors())  
