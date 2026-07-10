@@ -20,3 +20,43 @@
   font-size: 20px;
   box-shadow: 10px 10px 10px rgb(199, 193, 193);
 }
+
+.card{
+  height: 410px;
+  width: 300px;
+  border: 20px;
+  background-color: rgb(215, 221, 221);
+  margin: 10px;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 5px 5px 10px rgb(73, 74, 63);
+  padding: 10px;
+
+}
+.img-style-book{
+  height: 200px;
+  width: 200px;
+  background-size: cover;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+.card-container{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.price-row-style{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-around;
+}
+.add-to-cart-style{
+  background-color: rgb(255, 255, 34);
+  color: black;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+}
