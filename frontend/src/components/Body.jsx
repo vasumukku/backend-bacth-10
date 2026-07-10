@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 const Body = () => {
   return (
     <>
-    <div class="logout-box">
+    <div className="logout-box">
       <div >
         <input type="text" placeholder='enter your fav book name' className='searchbar' />
       <button className='logout-style'>
