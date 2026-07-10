@@ -5,7 +5,7 @@
   font-size: 20px;
   font-weight: bold;
   border: none;
-  margin-left: 200px;
+  margin-left: 70px;
 }
 .logout-box{
   display: flex;
@@ -41,11 +41,18 @@
   margin-top: 10px;
   border-radius: 10px;
 }
+.img-style-book:hover{
+  transform: scale(0.8);
+
+}
 .card-container{
   display: flex;
   flex-direction: row;
   gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
+
 .price-row-style{
   display: flex;
   flex-direction: row;
@@ -59,4 +66,16 @@
   border: none;
   padding: 10px 20px;
   font-size: 20px;
+}
+.add-to-cart-style:hover{
+  background-color: rgb(218, 182, 2);
+  transform: scale(1.2);
+}
+.createbutton-style{
+  background-color: green;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 20px;
+  font-size: 20px;
+  margin-left: 10px;
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import Body from "./components/Body"
 import Login from './components/Login'
 import Signin from './components/Signin'
+import CreateNotes from "./components/CreateNotes"
 
 import { BrowserRouter, Routes,Route } from 'react-router-dom';
 
@@ -13,7 +14,8 @@ const App = () => {
           <Routes>
               <Route path='/' element={<Login />} />
               <Route path="/signin" element={<Signin />}  /> 
-              <Route path='/body' element={<Body />} />  
+              <Route path='/body' element={<Body />} /> 
+              <Route path="/create" element={<CreateNotes />}  />
           </Routes>
       </BrowserRouter>
 

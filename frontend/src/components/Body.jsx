@@ -25,6 +25,9 @@ const Body = () => {
     <div className="logout-box">
       <div >
         <input type="text" placeholder='enter your fav book name' className='searchbar' />
+        <button className='createbutton-style'>
+          <Link to="/create">Create</Link>
+           <span style={{color:"#ffff",fontSize:"20px",fontWeight:"bold"}}>+</span></button>
       <button className='logout-style'>
         <Link to="/" >logout</Link>
         </button> 

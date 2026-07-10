@@ -1,0 +1,9 @@
+.book-creation-main-container{
+  background-color: bisque;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+}
