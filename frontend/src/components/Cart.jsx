@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import axios from "axios";
 import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 const Cart = () => {
-
+  const navigate=useNavigate()
   const [data, setData] = useState([])
 
   const allcartitems = async () => {
@@ -16,9 +19,19 @@ const Cart = () => {
     }
   }
 
+  let totalamount = 0
+  const order=async () => {
+       Swal.fire({
+      title: " order Success!",
+     text:`Total Amount of order ${totalamount}`,
+      icon: "success",
+    }); 
+    navigate("/body")
+
+  }
+
   useEffect(() => { allcartitems() }, [])
 
-  let totalamount = 0
 
   return (
     <>
@@ -37,6 +50,11 @@ const Cart = () => {
       >
 
         {data.map((element, index) => {
+        if (element.price.toLowerCase() !== "₹freee") {
+            totalamount =totalamount+ Number(
+                element.price.replace("₹", "").trim()
+            )
+        }  
           return (
 
             <div
@@ -106,7 +124,7 @@ const Cart = () => {
                     fontWeight: "bold"
                   }}
                 >
-                  ₹ {element.price}
+                   {element.price}
                 </h2>
               </div>
 
@@ -130,6 +148,17 @@ const Cart = () => {
           <h2>Total Amount : ₹ {totalamount}</h2>
         </div>
 
+
+        
+
+      </div>
+
+      <div style={{textAlign:"right",marginRight:"150px"}}>
+        <button  
+        style={{backgroundColor:"#F5CC27",padding:"20px 60px",fontSize:"20px",
+          fontWeight:"bold",border:"none",borderRadius:"10px"}}
+          onClick={order}
+        >Proceed to check out</button>
       </div>
 
     </>

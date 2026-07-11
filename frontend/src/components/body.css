@@ -1,92 +1,252 @@
-.logout-style{
-  background-color: red;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  border: none;
-  margin-left: 70px;
+/* ---------- Page Background ---------- */
+body{
+  background: #f5f7fb;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ---------- Top Section ---------- */
+
 .logout-box{
   display: flex;
-  flex-direction: row;
-  justify-content: end;
-  margin-right: 20px;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+  gap: 15px;
+
+  /* Suggestion:
+     Use gap instead of margin-left for cleaner spacing */
 }
+
+/* ---------- Search Bar ---------- */
+
 .searchbar{
-  height: 30px;
-  width: 500px;
-  border-radius: 10px;
-  font-size: 20px;
-  box-shadow: 10px 10px 10px rgb(199, 193, 193);
+  width: 420px;
+  height: 45px;
+  padding: 0 15px;
+
+  font-size: 17px;
+
+  border: 1px solid #dcdcdc;
+  border-radius: 12px;
+
+  outline: none;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+  transition: all .3s ease;
 }
+
+/* Suggestion:
+   Blue border on focus gives professional look */
+
+.searchbar:focus{
+  border-color: dodgerblue;
+  box-shadow: 0 0 8px rgba(30,144,255,.4);
+}
+
+/* ---------- Logout Button ---------- */
+
+.logout-style{
+  background: #e53935;
+  color: white;
+
+  padding: 12px 22px;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 17px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+/* Suggestion:
+   Add hover effect for better UX */
+
+.logout-style:hover{
+  background: #c62828;
+  transform: translateY(-2px);
+}
+
+/* ---------- Buttons ---------- */
+
+.createbutton-style,
+.cart-button-style{
+
+  color: white;
+
+  border: none;
+
+  border-radius: 10px;
+
+  padding: 12px 22px;
+
+  font-size: 17px;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.createbutton-style{
+  background: #28a745;
+}
+
+.createbutton-style:hover{
+  background: #218838;
+}
+
+.cart-button-style{
+  background: #ff9800;
+}
+
+.cart-button-style:hover{
+  background: #fb8c00;
+}
+
+/* ---------- Cards ---------- */
+
+.card-container{
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 30px;
+
+  margin-top: 30px;
+}
+
+/* Suggestion:
+   gap:30px gives premium spacing */
 
 .card{
-  height: 410px;
-  width: 300px;
-  border: 20px;
-  background-color: rgb(215, 221, 221);
-  margin: 10px;
+
+  width: 290px;
+
+  min-height: 430px;
+
+  background: white;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
   text-align: center;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  box-shadow: 5px 5px 10px rgb(73, 74, 63);
-  padding: 10px;
 
+  padding: 20px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+
+  transition: .3s;
 }
+
+/* Suggestion:
+   Card lifts when hovering */
+
+.card:hover{
+
+  transform: translateY(-10px);
+
+  box-shadow: 0 12px 30px rgba(0,0,0,.18);
+}
+
+/* ---------- Book Image ---------- */
+
 .img-style-book{
-  height: 200px;
-  width: 200px;
-  background-size: cover;
-  margin-top: 10px;
-  border-radius: 10px;
-}
-.img-style-book:hover{
-  transform: scale(0.8);
 
+  width: 180px;
+
+  height: 220px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  transition: .3s;
 }
-.card-container{
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
+
+/* Suggestion:
+   Slight zoom looks much better than shrinking */
+
+.img-style-book:hover{
+
+  transform: scale(1.08);
 }
+
+/* ---------- Price Row ---------- */
 
 .price-row-style{
+
   display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: space-around;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin: 18px 0;
 }
+
+/* ---------- Add to Cart Button ---------- */
+
 .add-to-cart-style{
-  background-color: rgb(255, 255, 34);
+  
+  width: 100%;
+
+  background: #ffc107;
+
   color: black;
-  border-radius: 10px;
+
   border: none;
-  padding: 10px 20px;
-  font-size: 20px;
+
+  border-radius: 10px;
+
+  padding: 12px;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: .3s;
 }
+
 .add-to-cart-style:hover{
-  background-color: rgb(218, 182, 2);
-  transform: scale(1.2);
+
+  background: #ffb300;
+
+  transform: scale(1.03);
 }
-.createbutton-style{
-  background-color: green;
-  border: none;
-  border-radius: 10px;
-  padding: 15px 20px;
-  font-size: 20px;
-  margin-left: 10px;
-}
-.cart-button-style{
-  background-color: darkgoldenrod;
-   border: none;
-  border-radius: 10px;
-  padding: 15px 20px;
-  font-size: 20px;
-  margin-left: 10px;
-}
+
+/* ---------- Cart Badge ---------- */
+
 .cart-number{
-  padding-bottom: 20px;
+
+  display: inline-flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  width: 28px;
+
+  height: 28px;
+
+  background: red;
+
+  color: white;
+
+  border-radius: 50%;
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  margin-left: 5px;
 }

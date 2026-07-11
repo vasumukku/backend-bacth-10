@@ -227,7 +227,7 @@ This makes development faster, improves code reusability,
 and makes applications easier to maintain.
 
 React uses the Virtual DOM, which updates only the changed parts of the page,
- improving performance
+ improving performance 
 
 
 
@@ -237,6 +237,10 @@ React automatically re-renders the component and updates the UI.
 
 2. What is useState?
 useState is a React Hook used to create and manage state in a functional component.
+
+we have 2 types of components
+1.class components
+2.functional components---we follow this one 🚨
 
 
 3.diff between props vs state
