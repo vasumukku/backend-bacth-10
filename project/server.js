@@ -24,6 +24,9 @@ app.put("/update/:id",updatenotebook)
 app.delete("/notes/delete/:id",deletenotebooks)
 
 
+const{getallcartitems,createCart}=require("./controllers/cart")
+app.post("/addcart",createCart)
+app.get("/cartitems",getallcartitems)
 
 
 

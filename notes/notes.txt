@@ -212,3 +212,46 @@ steps:
 5.install cors in backend folder
 6.import cors in backend server.js folder
 7.create a middleware of cors in backend folder server.js----app.use(cors())  
+
+
+
+introduction react :
+
+React is a popular JavaScript library used for building fast and interactive user interfaces,
+ especially for Single Page Applications (SPAs).
+It was developed by Facebook. 
+React follows a component-based architecture,
+where we divide the application into small,
+reusable components like a Navbar, Sidebar, Product Card, and Footer.
+This makes development faster, improves code reusability,
+and makes applications easier to maintain.
+
+React uses the Virtual DOM, which updates only the changed parts of the page,
+ improving performance
+
+
+
+ 1. What is State?
+State is an object that stores dynamic data in a component. When the state changes, 
+React automatically re-renders the component and updates the UI.
+
+2. What is useState?
+useState is a React Hook used to create and manage state in a functional component.
+
+
+3.diff between props vs state
+Props are used to pass data from a parent component to a child component, 
+whereas state stores data that belongs to a component and can change over time.
+
+
+4. What is the Virtual DOM?
+
+The Virtual DOM is a lightweight copy of the Real DOM. 
+When data changes, React first updates the Virtual DOM,
+ compares it with the previous version, 
+and updates only the changed elements in the Real DOM. This improves performance.
+
+
+
+5. What is List Rendering?
+List rendering means displaying multiple items using the map() method.
