@@ -21,12 +21,23 @@ const Cart = () => {
 
   let totalamount = 0
   const order=async () => {
+
+    try {
+      const cleardata=await axios.delete("http://localhost:5000/clearall")
        Swal.fire({
       title: " order Success!",
      text:`Total Amount of order ${totalamount}`,
       icon: "success",
     }); 
     navigate("/body")
+    } catch (error) {
+      Swal.fire({
+      title: "Error",
+     text:"something went wrong ",
+      icon: "error",
+    }); 
+    }
+      
 
   }
 

@@ -19,5 +19,13 @@ const getallcartitems=async (req,res) => {
   }
 }
 
+const clearCart=async (req,res) => {
+  try {
+    const deleteall=await Cart.deleteMany({})
+    res.send("successfully cleared cart items")
+  } catch (e) {
+    res.status(401).send(e.message)
+  }
+}
 
-module.exports={createCart,getallcartitems}
+module.exports={createCart,getallcartitems,clearCart}

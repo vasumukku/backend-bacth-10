@@ -24,9 +24,10 @@ app.put("/update/:id",updatenotebook)
 app.delete("/notes/delete/:id",deletenotebooks)
 
 
-const{getallcartitems,createCart}=require("./controllers/cart")
+const{getallcartitems,createCart,clearCart}=require("./controllers/cart")
 app.post("/addcart",createCart)
 app.get("/cartitems",getallcartitems)
+app.delete("/clearall",clearCart)
 
 
 
