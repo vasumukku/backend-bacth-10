@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 const Body = () => {
   const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
 
   // Get all books
   const allnotesfun = async () => {
@@ -20,7 +21,6 @@ const Body = () => {
 
   // Add to cart
   const addItemsInCart = async ({ imageid, name, author, price }) => {
-    
     try {
       const response = await axios.post("http://localhost:5000/addcart", {
         imageid,
@@ -30,11 +30,25 @@ const Body = () => {
       });
 
       console.log(response.data);
-      Swal.fire({title:"Added",text:`${response.data}`,icon:"Success"})
+
+      Swal.fire({
+        title: "Added",
+        text: response.data,
+        icon: "success",
+      });
     } catch (e) {
       console.log(e.message);
     }
   };
+
+  // Filter books
+  const filteredBooks = data.filter((book) => {
+    return (
+      book.name.toLowerCase().includes(search.toLowerCase()) ||
+      book.author.toLowerCase().includes(search.toLowerCase()) ||
+      book.price.toLowerCase().includes(search.toLowerCase())
+    );
+  });
 
   useEffect(() => {
     allnotesfun();
@@ -46,8 +60,10 @@ const Body = () => {
         <div>
           <input
             type="text"
-            placeholder="Enter your favourite book"
+            placeholder="Search by Name, Author or Price"
             className="searchbar"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
           <button className="createbutton-style">
@@ -78,40 +94,45 @@ const Body = () => {
       </div>
 
       <div className="card-container">
-        {data.map((element, index) => (
-          
-          <div className="card" key={index}>
-            <img
-              src={element.imageid}
-              alt="book"
-              className="img-style-book"
-            />
+        {filteredBooks.length > 0 ? 
+        (
+          filteredBooks.map((element, index) => (
+            <div className="card" key={index}>
+              <img
+                src={element.imageid}
+                alt="book"
+                className="img-style-book"
+              />
 
-            <h4 style={{ color: "red", fontSize: "20px" }}>
-              {element.name}
-            </h4>
+              <h4 style={{ color: "red", fontSize: "20px" }}>
+                {element.name}
+              </h4>
 
-            <h3>
-              Author :
-              <span style={{ color: "green" }}>
-                {element.author}
-              </span>
-            </h3>
+              <h3>
+                Author :
+                <span style={{ color: "green" }}>{element.author}</span>
+              </h3>
 
-            <div className="price-row-style">
-              <p>
-                <b>Price :</b> {element.price}
-              </p>
+              <div className="price-row-style">
+                <p>
+                  <b>Price :</b> {element.price}
+                </p>
 
-              <button
-                className="add-to-cart-style"
-                onClick={() => addItemsInCart(element)}
-              >
-                Add to Cart
-              </button>
+                <button
+                  className="add-to-cart-style"
+                  onClick={() => addItemsInCart(element)}
+                >
+                  Add to Cart
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : 
+        (
+          <h2 style={{ textAlign: "center", color: "red", width: "100%" }}>
+            No Books Found 📚
+          </h2>
+        )}
       </div>
     </>
   );
