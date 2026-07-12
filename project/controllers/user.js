@@ -1,53 +1,111 @@
-const User =require("../model/user")
-const bcrypt = require("bcrypt")  //1
+const User = require("../model/user");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-const createacc=async (req,res) => {
- try {
-  const {name,email,password}=req.body
-  const hashpassword = await bcrypt.hash(password, 10); //2
-    const response=await User.create({name,email,password:hashpassword})
-
-  res.json({
-    message:`Account created successfullly ${response.name}`,
-    userdata:response,
-   
-  })
-
- } catch (e) {
-      res.status(401).send(e.message) 
-
- }
-}
-
-const loginacc=async (req,res) => {
+// Create Account
+const createacc = async (req, res) => {
   try {
-    const {email,password}=req.body
-    const usercheck =await User.findOne({email})
-    if(!usercheck){
-      throw new Error("Email is not found");
-      
+    const { name, email, password } = req.body;
+
+    // Check Email Already Exists
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: "Email already exists",
+      });
     }
-                                            //$2b$12$OOfTA0rRu6s6dj73JjksGuHJNvG0v0.F0OP2ZbInJYBh/AZ3WSc8e" ,$2b$12$OOfTA0rRu6s6dj73JjksGuHJNvG0v0.F0OP2ZbInJYBh/AZ3WSc8e"
-    const passwordcheck=await bcrypt.compare(password,usercheck.password)
-    if(!passwordcheck){
-      throw new Error("passwor is invalid ");
-      
-    }
-    res.send("successfullly login ")
-    
+
+    // Hash Password
+    const hashpassword = await bcrypt.hash(password, 10);
+
+    // Create User
+    const response = await User.create({
+      name,
+      email,
+      password: hashpassword,
+    });
+
+    res.status(201).json({
+      success: true,
+      message: `Account created successfully ${response.name}`,
+      userdata: {
+        id: response._id,
+        name: response.name,
+        email: response.email,
+      },
+    });
+
   } catch (e) {
-    res.status(401).send(e.message)
+    res.status(500).json({
+      success: false,
+      message: e.message,
+    });
   }
-}
+};
 
+// Login Account
+const loginacc = async (req, res) => {
+  try {
 
+    const { email, password } = req.body;
 
+    // Check User
+    const usercheck = await User.findOne({ email });
 
+    if (!usercheck) {
+      return res.status(401).json({
+        success: false,
+        message: "Email not found",
+      });
+    }
 
-module.exports={createacc,loginacc}
+    // Compare Password
+    const passwordcheck = await bcrypt.compare(
+      password,
+      usercheck.password
+    );
 
+    if (!passwordcheck) {
+      return res.status(401).json({
+        success: false,
+        message: "Password is invalid",
+      });
+    }
 
+    // Generate JWT Token
+    const token = jwt.sign(
+      {
+        id: usercheck._id,
+        email: usercheck.email,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
 
-//1.import model 
-//2. write logic of create acc 
-//3.export function 
+    res.status(200).json({
+      success: true,
+      message: "Successfully Logged In",
+      token: token,
+      user: {
+        id: usercheck._id,
+        name: usercheck.name,
+        email: usercheck.email,
+      },
+    });
+
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: e.message,
+    });
+  }
+};
+
+module.exports = {
+  createacc,
+  loginacc,
+};

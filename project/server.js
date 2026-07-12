@@ -1,10 +1,12 @@
 const cors = require('cors') 
 const express=require("express")
+
 const mongoose = require("mongoose") 
 require("dotenv").config() //1 import
 const app=express()
 app.use(cors()) 
-
+const {authMiddleware}=require("./middleware/auth")
+console.log(authMiddleware)
 const port=process.env.port  //2 
 // console.log(process.env)
 app.use(express.json()) 
@@ -18,7 +20,7 @@ app.post("/login",loginacc)
 
 
 const {createnotebook,getallnotes,updatenotebook,deletenotebooks}=require("./controllers/notebook")
-app.post("/create",createnotebook)
+app.post("/create",authMiddleware,createnotebook)
 app.get("/allnotes",getallnotes)
 app.put("/update/:id",updatenotebook)
 app.delete("/notes/delete/:id",deletenotebooks)
