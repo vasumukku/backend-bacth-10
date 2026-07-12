@@ -24,11 +24,11 @@ app.put("/update/:id",updatenotebook)
 app.delete("/notes/delete/:id",deletenotebooks)
 
 
-const{getallcartitems,createCart,clearCart}=require("./controllers/cart")
+const{getallcartitems,createCart,clearCart,deleteitem}=require("./controllers/cart")
 app.post("/addcart",createCart)
 app.get("/cartitems",getallcartitems)
 app.delete("/clearall",clearCart)
-
+app.delete("/cart/delete/:id",deleteitem)
 
 
 mongoose.connect(process.env.mongodb_uri)

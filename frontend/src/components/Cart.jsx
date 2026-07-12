@@ -1,52 +1,95 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-
 const Cart = () => {
-  const navigate=useNavigate()
-  const [data, setData] = useState([])
+  const navigate = useNavigate();
 
+  const [data, setData] = useState([]);
+
+  // Get all cart items
   const allcartitems = async () => {
     try {
-      const allbook = await axios.get("http://localhost:5000/cartitems")
-      console.log(allbook.data)
-      setData(allbook.data)
-    } catch (e) {
-      console.log(e.message)
+      const response = await axios.get("http://localhost:5000/cartitems");
+      setData(response.data);
+    } catch (error) {
+      console.log(error.message);
     }
-  }
+  };
 
-  let totalamount = 0
-  const order=async () => {
+  useEffect(() => {
+    allcartitems();
+  }, []);
+
+  // Delete Single Item
+  const deleteitem = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/cart/delete/${id}`);
+
+      Swal.fire({
+        title: "Deleted!",
+        text: "Item removed successfully",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      // Update UI without another GET request
+      setData((prev) => prev.filter((item) => item._id !== id));
+    } catch (error) {
+      console.log(error.message);
+
+      Swal.fire({
+        title: "Error",
+        text: "Unable to delete item",
+        icon: "error",
+      });
+    }
+  };
+
+  // Total Amount
+  const totalamount = data.reduce((total, item) => {
+    if (!item.price.toLowerCase().includes("free")) {
+      return total + Number(item.price.replace("₹", "").trim());
+    }
+    return total;
+  }, 0);
+
+  // Place Order
+  const order = async () => {
+    if (data.length === 0) {
+      Swal.fire({
+        title: "Cart Empty",
+        text: "Please add items to cart.",
+        icon: "warning",
+      });
+      return;
+    }
 
     try {
-      const cleardata=await axios.delete("http://localhost:5000/clearall")
-       Swal.fire({
-      title: " order Success!",
-     text:`Total Amount of order ${totalamount}`,
-      icon: "success",
-    }); 
-    navigate("/body")
+      await axios.delete("http://localhost:5000/clearall");
+
+      Swal.fire({
+        title: "Order Successful 🎉",
+        text: `Total Amount Paid : ₹${totalamount}`,
+        icon: "success",
+      });
+
+      setData([]);
+
+      navigate("/body");
     } catch (error) {
       Swal.fire({
-      title: "Error",
-     text:"something went wrong ",
-      icon: "error",
-    }); 
+        title: "Error",
+        text: "Something went wrong!",
+        icon: "error",
+      });
     }
-      
-
-  }
-
-  useEffect(() => { allcartitems() }, [])
-
+  };
 
   return (
     <>
-
       <div style={{ textAlign: "center", margin: "30px 0" }}>
         <h1 style={{ color: "#2c3e50" }}>🛒 All Cart Items</h1>
       </div>
@@ -56,22 +99,17 @@ const Cart = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "20px"
+          gap: "20px",
         }}
       >
-
-        {data.map((element, index) => {
-        if (element.price.toLowerCase() !== "₹freee") {
-            totalamount =totalamount+ Number(
-                element.price.replace("₹", "").trim()
-            )
-        }  
-          return (
-
+        {data.length === 0 ? (
+          <h2>Your Cart is Empty 😔</h2>
+        ) : (
+          data.map((element) => (
             <div
-              key={index}
+              key={element._id}
               style={{
-                backgroundColor: "#ffffff",
+                backgroundColor: "#fff",
                 width: "80%",
                 padding: "20px",
                 borderRadius: "15px",
@@ -79,70 +117,53 @@ const Cart = () => {
                 justifyContent: "space-between",
                 alignItems: "center",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                border: "1px solid #ddd"
               }}
             >
-
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "20px"
+                  gap: "20px",
                 }}
               >
-
-                <div>
-                  <img
-                    src={element.imageid}
-                    alt="book image"
-                    style={{
-                      height: "150px",
-                      width: "110px",
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                      border: "2px solid #ddd"
-                    }}
-                  />
-                </div>
-
-                <div>
-                  <h2
-                    style={{
-                      margin: "0",
-                      color: "#2c3e50"
-                    }}
-                  >
-                    {element.name}
-                  </h2>
-
-                  <h4
-                    style={{
-                      marginTop: "10px",
-                      color: "#666",
-                      fontWeight: "500"
-                    }}
-                  >
-                    {element.author}
-                  </h4>
-                </div>
-
-              </div>
-
-              <div>
-                <h2
+                <img
+                  src={element.imageid}
+                  alt={element.name}
                   style={{
-                    color: "green",
-                    fontWeight: "bold"
+                    height: "150px",
+                    width: "110px",
+                    objectFit: "cover",
+                    borderRadius: "10px",
                   }}
-                >
-                   {element.price}
-                </h2>
+                />
+
+                <div>
+                  <h2>{element.name}</h2>
+                  <h4>{element.author}</h4>
+                </div>
               </div>
 
-            </div>
+              <div style={{ textAlign: "center" }}>
+                <h2 style={{ color: "green" }}>{element.price}</h2>
 
-          )
-        })}
+                <button
+                  style={{
+                    backgroundColor: "red",
+                    color: "white",
+                    padding: "10px 20px",
+                    border: "none",
+                    borderRadius: "10px",
+                    fontSize: "18px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => deleteitem(element._id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))
+        )}
 
         <div
           style={{
@@ -152,28 +173,37 @@ const Cart = () => {
             padding: "15px",
             borderRadius: "10px",
             textAlign: "right",
-            marginTop: "10px",
-            marginBottom: "30px"
+            marginBottom: "20px",
           }}
         >
           <h2>Total Amount : ₹ {totalamount}</h2>
         </div>
-
-
-        
-
       </div>
 
-      <div style={{textAlign:"right",marginRight:"150px"}}>
-        <button  
-        style={{backgroundColor:"#F5CC27",padding:"20px 60px",fontSize:"20px",
-          fontWeight:"bold",border:"none",borderRadius:"10px"}}
+      <div
+        style={{
+          textAlign: "right",
+          marginRight: "150px",
+          marginBottom: "30px",
+        }}
+      >
+        <button
           onClick={order}
-        >Proceed to check out</button>
+          style={{
+            backgroundColor: "#F5CC27",
+            padding: "18px 50px",
+            fontSize: "20px",
+            fontWeight: "bold",
+            border: "none",
+            borderRadius: "10px",
+            cursor: "pointer",
+          }}
+        >
+          Proceed to Checkout
+        </button>
       </div>
-
     </>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

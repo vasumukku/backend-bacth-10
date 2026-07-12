@@ -28,4 +28,21 @@ const clearCart=async (req,res) => {
   }
 }
 
-module.exports={createCart,getallcartitems,clearCart}
+
+const deleteitem = async (req,res) => {
+  try {
+      const id =req.params.id
+      const response = await Cart.findByIdAndDelete({_id:id})
+      if(!response){
+        throw new Error("notebook not found 💔");
+        
+      } 
+
+      res.send("item deleted 🚨") 
+
+  } catch (e) {
+    res.status(401).send(e.message) 
+  }  
+}
+
+module.exports={createCart,getallcartitems,clearCart,deleteitem}
